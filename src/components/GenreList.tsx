@@ -12,7 +12,7 @@ const GenreList = ({ setGenre, selectedGenre }: Props) => {
 
   return (
     <List>
-      {data.map((genre) => {
+      {data?.results.map((genre) => {
         return (
           <ListItem key={genre.id} py="5px">
             <HStack cursor="pointer" onClick={() => setGenre({ ...genre })}>

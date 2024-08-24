@@ -17,7 +17,7 @@ const PlatformsSelector = ({ curPlatform, setCurPlatform }: Props) => {
         Platform: {curPlatform?.name}
       </MenuButton>
       <MenuList>
-        {data.map((p) => {
+        {data?.results.map((p) => {
           return (
             <MenuItem
               key={p.id}

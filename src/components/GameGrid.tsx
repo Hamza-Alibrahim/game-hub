@@ -14,10 +14,15 @@ interface Props {
 }
 
 const GameGrid = ({ genre, curPlatform, order, title }: Props) => {
-  const { data, error, isLoading } = useGame(genre, curPlatform, order, title);
+  const { data, error, isLoading } = useGame({
+    selectedGenre: genre,
+    curPlatform,
+    order,
+    title,
+  });
   const skeletons = Array.from({ length: 20 }, (_, i) => i);
 
-  if (error) return <Text>{error}</Text>;
+  if (error) return <Text>{error.message}</Text>;
 
   return (
     <SimpleGrid
@@ -31,7 +36,7 @@ const GameGrid = ({ genre, curPlatform, order, title }: Props) => {
       spacing={5}
     >
       {isLoading && skeletons.map((s) => <GameSkeleton key={s} />)}
-      {data.map((g) => (
+      {data?.results.map((g) => (
         <GameCard key={g.id} {...g} />
       ))}
     </SimpleGrid>

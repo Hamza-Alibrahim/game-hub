@@ -1,7 +1,8 @@
 import { Genre } from "./useGenre";
 import { Platform } from "./usePlatform";
-import useData from "./useData";
 import { Order } from "../components/OrderSelector";
+import apiClient, { FetchResonse } from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 export interface Game {
   id: number;
@@ -12,22 +13,29 @@ export interface Game {
   rating_top: number;
 }
 
-const useGame = (
-  selectedGenre: Genre | null,
-  curPlatform: Platform | null,
-  order: Order | null,
-  title: string
-) =>
-  useData<Game>(
-    "/games",
-    {
+interface GameQuery {
+  selectedGenre: Genre | null;
+  curPlatform: Platform | null;
+  order: Order | null;
+  title: string;
+}
+
+const useGame = (gameQuery: GameQuery) => {
+  const fetchGames = async () => {
+    const res = await apiClient.get<FetchResonse<Game>>("/games", {
       params: {
-        genres: selectedGenre?.id,
-        platforms: curPlatform?.id,
-        ordering: order?.val,
-        search: title,
+        genres: gameQuery.selectedGenre?.id,
+        parent_platforms: gameQuery.curPlatform?.id,
+        ordering: gameQuery.order?.val,
+        search: gameQuery.title,
       },
-    },
-    [selectedGenre?.id, curPlatform?.id, order?.val, title]
-  );
+    });
+    return res.data;
+  };
+
+  return useQuery({
+    queryKey: ["games", gameQuery],
+    queryFn: fetchGames,
+  });
+};
 export default useGame;
