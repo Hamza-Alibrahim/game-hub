@@ -1,17 +1,15 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
+import useGameQuery from "../Store";
 
 export interface Order {
   title: string;
   val: string;
 }
 
-interface Props {
-  order: Order | null;
-  setOrder: (val: Order) => void;
-}
-
-const OrderSelector = ({ order, setOrder }: Props) => {
+const OrderSelector = () => {
+  const order = useGameQuery((s) => s.order);
+  const setOrder = useGameQuery((s) => s.setOrder);
   const data: Order[] = [
     { val: "", title: "Revelance" },
     { val: "-added", title: "Date added" },

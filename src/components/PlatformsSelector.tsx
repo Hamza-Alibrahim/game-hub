@@ -1,14 +1,11 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
 import usePlatform from "../hooks/usePlatform";
-import { Platform } from "../hooks/usePlatform";
+import useGameQuery from "../Store";
 
-interface Props {
-  curPlatform: Platform | null;
-  setCurPlatform: (val: Platform) => void;
-}
-
-const PlatformsSelector = ({ curPlatform, setCurPlatform }: Props) => {
+const PlatformsSelector = () => {
+  const curPlatform = useGameQuery((s) => s.curPlatform);
+  const setCurPlatform = useGameQuery((s) => s.setCurPlatform);
   const { data } = usePlatform();
 
   return (

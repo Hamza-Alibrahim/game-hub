@@ -11,12 +11,10 @@ import {
 import { Search2Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Logo from "../assets/logo.webp";
 import { useEffect, useState } from "react";
+import useGameQuery from "../Store";
 
-interface Props {
-  setTitle: (val: string) => void;
-}
-
-const Navbar = ({ setTitle }: Props) => {
+const Navbar = () => {
+  const setTitle = useGameQuery((s) => s.setTitle);
   const [name, setName] = useState("");
   const { colorMode, toggleColorMode } = useColorMode();
   useEffect(() => {

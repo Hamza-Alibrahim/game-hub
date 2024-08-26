@@ -1,13 +1,11 @@
 import { List, ListItem, HStack, Image, Button } from "@chakra-ui/react";
 import getCroppedImageUrl from "../services/getCroppedImageUrl";
-import useGenre, { Genre } from "../hooks/useGenre";
+import useGenre from "../hooks/useGenre";
+import useGameQuery from "../Store";
 
-interface Props {
-  setGenre: (val: Genre) => void;
-  selectedGenre: Genre | null;
-}
-
-const GenreList = ({ setGenre, selectedGenre }: Props) => {
+const GenreList = () => {
+  const selectedGenre = useGameQuery((s) => s.selectedGenre);
+  const setGenre = useGameQuery((s) => s.setGenre);
   const { data } = useGenre();
 
   return (
