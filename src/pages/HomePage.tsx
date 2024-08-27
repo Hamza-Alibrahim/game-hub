@@ -1,32 +1,24 @@
-import { Grid, GridItem, Heading, HStack, Show } from "@chakra-ui/react";
-import Navbar from "./components/Navbar";
-import GenreList from "./components/GenreList";
-import GameGrid from "./components/GameGrid";
-import PlatformsSelector from "./components/PlatformsSelector";
-import OrderSelector from "./components/OrderSelector";
-import useGameQuery from "./Store";
+import { Show, GridItem, Heading, HStack, Grid } from "@chakra-ui/react";
+import GameGrid from "../components/GameGrid";
+import GenreList from "../components/GenreList";
+import OrderSelector from "../components/OrderSelector";
+import PlatformsSelector from "../components/PlatformsSelector";
+import useGameQuery from "../Store";
 
-const App = () => {
+const MainPage = () => {
   const selectedGenre = useGameQuery((s) => s.selectedGenre);
   const curPlatform = useGameQuery((s) => s.curPlatform);
-
   return (
     <Grid
       templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"nav nav" "aside main"`,
+        base: `"main"`,
+        lg: `"aside main"`,
       }}
       templateColumns={{
         base: "1fr",
         lg: "200px 1fr",
       }}
-      px={5}
-      pb="20px"
-      transition="padding .5s"
     >
-      <GridItem area="nav">
-        <Navbar />
-      </GridItem>
       <Show above="lg">
         <GridItem area="aside" maxW="225px" pl="10px">
           <Heading fontSize="2xl" mb={3}>
@@ -40,7 +32,7 @@ const App = () => {
           {curPlatform?.name ? curPlatform.name : ""}{" "}
           {selectedGenre?.name ? selectedGenre.name : ""} Gaming
         </Heading>
-        <HStack my={5}>
+        <HStack my={5} flexWrap="wrap">
           <PlatformsSelector />
           <OrderSelector />
         </HStack>
@@ -49,4 +41,4 @@ const App = () => {
     </Grid>
   );
 };
-export default App;
+export default MainPage;
