@@ -23,6 +23,11 @@ class ApiClient<T> {
     const res = await axiosApi.get<FetchResonse<T>>(this.endPoint, config);
     return res.data;
   };
+
+  get = async (id: number | string) => {
+    const res = await axiosApi.get<T>(this.endPoint + "/" + id);
+    return res.data;
+  };
 }
 
 export default ApiClient;
