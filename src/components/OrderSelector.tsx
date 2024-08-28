@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
 import useGameQuery from "../Store";
-import { Order } from "../entities/Order";
+import Order from "../entities/Order";
 
 const OrderSelector = () => {
   const order = useGameQuery((s) => s.order);

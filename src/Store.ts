@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { Order } from "./entities/Order";
-import { Genre } from "./entities/Genre";
-import { Platform } from "./entities/Platform";
+import Order from "./entities/Order";
+import Genre from "./entities/Genre";
+import Platform from "./entities/Platform";
 
 interface GameQueryStore {
   title?: string;

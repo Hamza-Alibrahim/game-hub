@@ -12,21 +12,27 @@ import { Search2Icon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Logo from "../assets/logo.webp";
 import { useEffect, useState } from "react";
 import useGameQuery from "../Store";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const setTitle = useGameQuery((s) => s.setTitle);
   const [name, setName] = useState("");
   const { colorMode, toggleColorMode } = useColorMode();
+  const navigate = useNavigate();
   useEffect(() => {
     const x = setTimeout(() => {
       setTitle(name);
+      navigate("/");
     }, 500);
     return () => clearTimeout(x);
   }, [name]);
 
   return (
     <HStack py="10px">
-      <Image src={Logo} boxSize="60px" cursor="pointer" />
+      <Link to="/">
+        <Image src={Logo} boxSize="60px" cursor="pointer" minW="60px" />
+      </Link>
       <InputGroup>
         <InputLeftElement children={<Search2Icon />} />
         <Input

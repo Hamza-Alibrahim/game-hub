@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 
 const Layout = () => {
   return (
-    <Box>
+    <Box maxW="1600px" m="auto">
       <Navbar />
       <Outlet />
     </Box>
