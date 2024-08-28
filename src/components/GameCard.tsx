@@ -6,7 +6,7 @@ import {
   CardBody,
   Heading,
 } from "@chakra-ui/react";
-import { Game } from "../hooks/useGames";
+import { Game } from "../entities/Game";
 import PlatformIconList from "./PlatformIconList";
 import getCroppedImageUrl from "../services/getCroppedImageUrl";
 import placeholderImage from "../assets/no-image-placeholder.webp";
